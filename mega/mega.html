@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<link rel="stylesheet" type="text/css" href="mega.css">
+	<link rel="stylesheet" type="text/css" href="mega.css">
 </head>
 <body>
-
 <div class="flex-container">
 <header>
-  <h1>MEGA SENA</h1>
+ <h1>MEGA SENA</h1>
 </header>
 <article class="article">
 <form id="volante-ms">
 	<div>
-	  <textarea id="view" rows="5" cols="32"></textarea> 
+	  <textarea id="view" rows="5" cols="32" disabled="disabled">Digite entre 7 e 10,  numeros  repetidos seram ignorados.</textarea>
 		<div id="numeros-volante">
 			<div>
 				<button type="button" class="megasena" value="1">01</button>
@@ -99,14 +98,16 @@
 		</div>
 		<div id="opcoes">
 			<div>
- 				 <a href="index.html"><input type="button"value="voltar"></a>
- 				<button type="button" class="jogar" value="">JOGAR</button>
+				<button type="button" class="" >voltar</button>
+				<button id='game' type="button" class="" >JOGAR</button>
+				<button id='clear' type="button" class="" >limpar</button>
 			</div>
+		<div id="result" value="">
 		</div>
 	</div>
 	</form>
  </article>
- <footer>Copyright LucasCMota</footer>
+ <footer>LucasCMota</footer>
 </div>
 <script src="mega.js" type="text/javascript"></script>
 </body>

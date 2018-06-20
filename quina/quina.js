@@ -1,59 +1,87 @@
-var $game = document.body.querySelector('#game');
-var $botoes = document.body.querySelectorAll( ".quina" );
-var numerosExcolhidos = [];
-var resultArr = [];
+(function(document){
+	var $buttonGame = document.querySelector('#game');
+	var $buttons = document.body.querySelectorAll( ".quina" );
+	var $buttonClear = document.querySelector("#clear");
+	var numberSelect = [];
+	var newArr = [];
+	var withoutDuplicates = [];
+	var duplicatedKeys = [];
 
-for( var x = 0; x < $botoes.length; x++ ){
-   $botoes[ x ].addEventListener("click", function(){
-       document.body.querySelector( "#view" ).value += this.value + ' ';
-       numerosExcolhidos.push( this.value );
-       console.log(numerosExcolhidos);
-   });
-}
-
-function lotteryGoodLuck( list ){
-	var totalOfSelectedNumbers = list.length -1; 
-	var numOrdem = numerosExcolhidos.sort( ( a, b ) => a - b);
-	var n = totalOfSelectedNumbers ;
-	var n1 = 1, n2 = 1, n3 = 1, n4 = 1, n5 = 1; 
-	var arrInit=  [ list[ n1 ], list[ n2 ], list[ n3 ], list[ n4 ], list[ n5 ]];
-
-	while(n >= -1){
-
-		switch( n >= - 1 ){
-
-			case n5 <= ( n ) :
-					if( resultArr.length == Math.pow( n, 5) ){ 				 
-							return resultArr;						  
-					} else {
-						resultArr.push( [list[n1], list[n2], list[n3], list[n4], list[n5]] );
-						n5++
-						break;
-					}
-			case n4 <= ( n - 1) :
-					n5 = 1;
-					n4 ++;
-					break;
-			case n3 <= ( n - 1 ):
-					n4 = 1, n5 = 1;
-					n3 ++;
-					break;
-			case n2 <= ( n - 1) :
-					n3 = 1, n4 = 1, n5 = 1;
-					n2 ++;
-					break;
-			case n1 <= ( n - 1) :
-					n2 = 1, n3 = 1, n4 = 1, n5 = 1;
-					n1 ++;
-					break; 
-			default :
-					n--;
-		}	
+	for(var x = 0; x < $buttons.length; x++){	
+		$buttons[ x ].addEventListener("click", function(){
+			document.body.querySelector( "#view" ).value += this.value + ' ';
+			numberSelect.push(this.value);
+	   });
 	}
-}
+	function removeDuplicates(list){
+		withoutDuplicates = newArr.filter(l => (new Set(l)).size === l.length)
+		Array.prototype.diff = function (a) {
+		  return this.filter((i) => a.indexOf(i) === -1)
+		}
+		withoutDuplicates.forEach((a, i) => {
+		  withoutDuplicates.forEach((b, x) => {
+		    if(i !== x && a.diff(b).length === 0) {
+		        if(duplicatedKeys.indexOf(a) === -1 && duplicatedKeys.indexOf(b) === -1) {
+		            duplicatedKeys.push(a)
+		        }
+		    }
+		  })
+		})
+	return newArr = withoutDuplicates.filter(a => duplicatedKeys.indexOf(a) === -1)
+	}
 
-$game.addEventListener('click', function(){
-	lotteryGoodLuck(numerosExcolhidos);
-	document.querySelector('#result').value = resultArr;
-	console.log(resultArr);
-});
+	function lotteryGoodLuck( list ){
+		list = numberSelect;
+		numberSelect.sort( ( a, b ) => a - b);
+		var n = list.length - 1; 
+		var totalOfNumbers = list.length; 
+		var n1 = 0, n2 = 1, n3 = 2, n4 = 3, n5 = 4; 
+		var arr = [ list[ n1 ], list[ n2 ], list[ n3 ], list[ n4 ], list[ n5 ]];
+		while( n >  0){
+			switch( n > 0 ){
+				case n5 < ( n ) :
+						newArr.push( [list[n1], list[n2], list[n3], list[n4], list[n5]] ) ;
+						n5++;
+						break;
+				case n4 < ( n ) :
+						n5 = 4;
+						n4 ++;
+						break;
+				case n3 < ( n  ) :
+						n4 = 3, n5 = 4;
+						n3 ++;
+						break;
+				case n2 < ( n ) :
+						n3 = 2, n4 = 3, n5 = 4;
+						n2 ++;
+						break;
+				case n1 < ( n ) :
+						n2 = 1, n3 = 2, n4 = 3, n5 = 4;
+						n1 ++;
+						break; 
+				default :
+						n--;
+			}	
+		}
+		return removeDuplicates(newArr);
+	}
+
+	$buttonGame.addEventListener('click', function(){
+		if(numberSelect.length < 6 || numberSelect.length > 15){
+			alert(' escolha entre 6 e 15 numeros');
+		}else{
+			lotteryGoodLuck(numberSelect);
+			document.querySelector("#result").innerHTML = newArr;
+		}
+	},false);
+
+	$buttonClear.addEventListener('click', function(){
+		document.querySelector('#view').value = '';
+		document.querySelector('#result').innerHTML = '';
+		numberSelect = [];
+		newArr = [];
+	},false);
+}(document));
+
+
+

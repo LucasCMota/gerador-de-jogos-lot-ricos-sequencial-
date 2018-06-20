@@ -2,9 +2,6 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="quina.css">
-<script>
- 
-</script>
 </head>
 <body>
 <div class="flex-container">
@@ -14,8 +11,8 @@
 <article class="article">
   <form id="volante-q">
   <div>
-  <textarea id="view" rows="5" cols="32"></textarea> 
-	<div>
+  <textarea id="view" rows="5" cols="32" disabled="disabled" value=""> Digite entre 6 e 15,  numeros  repetidos reram ignorados.</textarea> 
+	<div> 
 		</div id ="num-vol">
 			<div>
 				<button type="button" class="quina" value="1">01</button>
@@ -32,8 +29,8 @@
 				<button type="button" class="quina" value="10">10</button>
 				<button type="button" class="quina" value="11">11</button>
 				<button type="button" class="quina" value="12">12</button>
-				<button type="button" class="quina" value="14">14</button>
-				<button type="button" class="quina" value="13">13</button>
+				<button type="button" class="quina" value="14">13</button>
+				<button type="button" class="quina" value="13">14</button>
 				<button type="button" class="quina" value="15">15</button>
 				<button type="button" class="quina" value="16">16</button>
 			</div>	
@@ -124,10 +121,10 @@
 			<div>
 				<button type="button" class="" >voltar</button>
 				<button id='game' type="button" class="" >JOGAR</button>
+				<button id='clear' type="button" class="" >limpar</button>
 			</div>
-			<div>
-				  <textarea id="result" rows="5" cols="32"></textarea> 
-			</div>>
+			<div id="result" value="">
+			</div>
 		</div>
 	</form>
  </article>
